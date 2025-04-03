@@ -1,6 +1,6 @@
 #Caso 1: "init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"]
 #Caso 2: "init": ["Computador-com-problema", "Computador-nao-liga"]
-#Caso 3: "Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"
+#Caso 3: "init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"]
 
 from gps import gps
 
@@ -103,24 +103,6 @@ problem = {
 		"preconds": ["Computador-com-problema", "Computador-nao-liga"],
 		"add": ["fonte-inicia"],
 		"delete": [" "]
-	},
-	{
-		"action": "checar-processador-e-memoria-ram",
-		"preconds": ["bios-nao-esta-iniciando", "speaker-emite-alertas"],
-		"add": ["problema-detectado"],
-		"delete": [""]
-	},
-	{
-		"action": "sistema-operacional-inicia",
-		"preconds": ["computador-liga","bios-esta-iniciando"],
-		"add": ["boot-os"],
-		"delete": [""]
-	},
-	{
-		"action": "OS-inicia-completamente",
-		"preconds": ["computador-liga","bios-esta-iniciando","boot-os"],
-		"add": ["funcionamento-normal"],
-		"delete": ["computador-com-problema"]
 	},
    
 	]
