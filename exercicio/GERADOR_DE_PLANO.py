@@ -1,11 +1,12 @@
-#Caso 1: "init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"]
-#Caso 2: "init": ["Computador-com-problema", "Computador-nao-liga"]
-#Caso 3: "init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"]
+#Caso 1: "init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"]
+#Caso 2: "init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"]
+#Caso 3: "init": ["Computador-com-problema", "Computador-nao-liga"]
+
 
 from gps import gps
 
 problem = {
-	"init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"],
+	"init": ["Computador-com-problema", "Computador-nao-liga"],
 	"finish": ["Problema-detectado"],
 	"ops": [
 	{
