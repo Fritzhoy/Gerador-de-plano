@@ -1,5 +1,4 @@
-#Caso 1: "init": ["computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"]
-#"finish": ["problema-na-placa-mae"]
+
 #Caso 2: "init": ["computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"]
 #Caso 3: "init": ["computador-com-problema", "Computador-nao-liga"]
 
@@ -12,8 +11,14 @@ problem = {
 	 "init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "ordem-de-boot-correta", "unidade-de-armazenamento-nao-integra"],
 	"finish": ["troque-o-HD/SDD"],
     
+	#Regra 7
+    #"init": ["computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"],
+    #"finish": ["problema-processador-ou-memoria-ram"],
+    
+	#Regra 8
 	#"init": ["computador-com-problema", "computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"],
 	#"finish": ["problema-na-placa-mae"],
+    
 	"ops": [
     {
 		"action": "Sem-problemas",
