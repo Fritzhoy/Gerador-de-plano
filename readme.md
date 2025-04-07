@@ -1,97 +1,96 @@
-## Estado Inicial
+## LISTA DE REGRAS
 
-## Caso 1
+### REGRA 1
 
-- **Init:** "Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"
+SE (o computador liga                  = Sim)
+E (A BIOS está iniciando     = Sim)
+E (O Sistema Operacional inicia    = Sim)
+E (O sistema operacional inicia completamente  = Sim)
+ENTÃO (Sem problemas, tudo normal)
 
-### Ação: "o-computador-liga"
+### REGRA 2
 
-- **Requisitos:** "Computador-com-problema", "checar-computador-liga"
-- **Adiciona:** "Computador-liga", "checar-bios"
-- **Remove:** "checar-computador-liga"
+SE (o computador liga                  = Sim)
+E (A BIOS está iniciando     = Sim)
+E (O Sistema Operacional inicia    = Sim)
+E (O sistema operacional inicia completamente  = Não)
+ENTÃO (O Sistema Operacional está corrompido)
 
-### Ação: "a-bios-nao-esta-iniciando"
+### REGRA 3
 
-- **Requisitos:** "Computador-com-problema", "Computador-liga", "checar-bios", "a-bios-nao-inicia"
-- **Adiciona:** "checar-speaker"
-- **Remove:** "checar-bios"
+SE (o computador liga                 = Sim)
+E (A BIOS está iniciando     = Sim) 
+E (O Sistema Operacional inicia    = Não)
+E (A unidade de armazenamento é detectada               = Sim)
+E (A ordem de boot está correta                = Sim)
+E (A unidade de armazenamento está íntegra               = Sim)
+ENTÃO (O Sistema Operacional está corrompido)
 
-### Ação: "Speaker-nao-emite-alerta"
+### REGRA 4
 
-- **Requisitos:** "Computador-com-problema", "Computador-liga", "a-bios-nao-inicia", "checar-speaker", "Speaker-nao-emite-alerta"
-- **Adiciona:** "Problema-na-placa-mae"
-- **Remove:** -
+SE (o computador liga      = Sim)
+E (A BIOS está iniciando     = Sim) 
+E (O Sistema Operacional inicia    = Não)
+E (A unidade de armazenamento é detectada               = Sim)
+E (A ordem de boot está correta                = Sim)
+E (A unidade de armazenamento está íntegra               = Não)
+ENTÃO (Troque o HD/SDD)
 
-### Ação: "Problema-na-placa-mae"
+### REGRA 5
 
-- **Requisitos:** "Computador-com-problema", "Computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta", "Problema-na-placa-mae"
-- **Adiciona:** "Problema-detectado"
-- **Remove:** "Computador-com-problema"
+SE (o computador liga     = Sim)
+E (A BIOS está iniciando    = Sim) 
+E (O Sistema Operacional inicia   = Não)
+E (A unidade de armazenamento é detectada  = Sim)
+E (A ordem de boot está correta   = Não)
+ENTÃO (Ajustar Boot)
 
-## Caso 2: 
+### REGRA 6
 
-- **init:** "Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"
+SE (o computador liga      = Sim)
+E (A BIOS está iniciando     = Sim) 
+E (O Sistema Operacional inicia    = Não)
+E (A unidade de armazenamento é detectada   = Não)
+ENTÃO (HD está desconectado ou com problema)
 
-### Ação: "o-computador-liga"
+### REGRA 7
 
-- **Requisitos:** "Computador-com-problema", "checar-computador-liga"
-- **Adiciona:** "Computador-liga", "checar-bios"
-- **Remove:** "checar-computador-liga"
+SE (o computador liga      = Sim)
+E (A BIOS está iniciando     = Não)
+E (O speaker emite alertas     = Sim)
+ENTÃO (Problema na memória ou processador)
 
-### Ação: "a-bios-nao-esta-iniciando"
+### REGRA 8
 
-- **Requisitos:** "Computador-com-problema", "Computador-liga", "checar-bios", "a-bios-nao-inicia"
-- **Adiciona:** "checar-speaker"
-- **Remove:** "checar-bios"
+SE (o computador liga    = Sim)
+E (A BIOS está iniciando   = Não)
+E (O speaker emite alertas   = Não)
+ENTÃO (Problema na placa mãe)
 
-### Ação: "Speaker-emite-alerta"
+### REGRA 9
 
-- **Requisitos:** "Computador-com-problema", "Computador-liga", "a-bios-nao-inicia", "checar-speaker", "Speaker-emite-alerta"
-- **Adiciona:** "Problema-processador-e-memoria"
-- **Remove:** -
+SE (o computador não liga   = Não)
+E (A fonte inicia     = Sim)
+E (A voltagem está correta    = Sim)
+ENTÃO (Problema no circuito da Placa Mãe)
 
-### Ação: "Problema-processador-e-memoria-ram"
+### REGRA 10
 
-- **Requisitos:** "Computador-com-problema", "Computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta", "Problema-processador-e-memoria"
-- **Adiciona:** "Problema-detectado"
-- **Remove:** "Computador-com-problema"
+SE (o computador não liga   = Não)
+E (A fonte inicia    = Sim)
+E (A voltagem está correta   = Não)
+ENTÃO (A fonte está com problema)
 
+### REGRA 11
 
+SE (o computador não liga   = Não)
+E (A fonte inicia    = Não)
+E (A alimentacao está conectada  = Sim)
+ENTÃO (A fonte está queimada)
 
-## Caso 3
+### REGRA 12
 
-- **Init:** "Computador-com-problema", "Computador-nao-liga"
-
-### Ação: "o-computador-nao-liga"
-
-- **Requisitos:** "Computador-com-problema", "Computador-nao-liga"
-- **Adiciona:** "checar-fonte"
-- **Remove:** 
-
-### Ação: "checar-se-a-fonte-inicia"
-
-- **Requisitos:** "Computador-nao-liga", "checar-fonte"
-- **Adiciona:** "fonte-inicia", "checar-voltagem"
-- **Remove:** 
-
-### Ação: "checar-se-voltagem-esta-correta"
-
-- **Requisitos:** "Computador-com-problema", "Computador-nao-liga", "fonte-inicia", "checar-voltagem"
-- **Adiciona:** "Voltagem-correta"
-- **Remove:** "checar-voltagem"
-
-### Ação: "checar-circuito-de-alimentacao"
-
-- **Requisitos:** "Computador-com-problema", "Computador-nao-liga", "fonte-inicia", "Voltagem-correta"
-- **Adiciona:** "circuito-de-alimentacao"
-- **Remove:** 
-
-### Ação: "Problema-no-circuito-de-alimentacao-da-placa-mae"
-
-- **Requisitos:** "Computador-com-problema", "Computador-nao-liga", "fonte-inicia", "Voltagem-correta", "circuito-de-alimentacao"
-- **Adiciona:** "Problema-detectado"
-- **Remove:** "Computador-com-problema"
-
-## Estado Final
-
-- Problema detectado
+SE (o computador não liga   = Não)
+E (A fonte inicia    = Não)
+E (A alimentacao está conectada  = Não)
+ENTÃO (Ligar na tomada)

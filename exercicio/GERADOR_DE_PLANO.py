@@ -1,61 +1,97 @@
-#Caso 1: "init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"]
-#Caso 2: "init": ["Computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"]
-#Caso 3: "init": ["Computador-com-problema", "Computador-nao-liga"]
+#Caso 1: "init": ["computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"]
+#"finish": ["problema-na-placa-mae"]
+#Caso 2: "init": ["computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"]
+#Caso 3: "init": ["computador-com-problema", "Computador-nao-liga"]
+
 
 
 from gps import gps
 
 problem = {
-	"init": ["Computador-com-problema", "Computador-nao-liga"],
-	"finish": ["Problema-detectado"],
+    #Regra 4: 
+	 "init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "ordem-de-boot-correta", "unidade-de-armazenamento-nao-integra"],
+	"finish": ["troque-o-HD/SDD"],
+    
+	#"init": ["computador-com-problema", "computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"],
+	#"finish": ["problema-na-placa-mae"],
 	"ops": [
-	{
-		"action": "Problema-na-placa-mae",
-		"preconds": ["Computador-com-problema", "Computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta", "Problema-na-placa-mae"],
-		"add": ["Problema-detectado"],
+    {
+		"action": "Sem-problemas",
+		"preconds": ["computador-com-problema","a-bios-inicia", "computador-liga", "sistema-operacional-inicia", "sistema-operacional-inicia-completamente"],
+		"add": ["Sem-problemas"],
 		"delete": ["computador-com-problema"]
 	},
     {
-		"action": "Problema-processador-e-memoria-ram",
-		"preconds": ["Computador-com-problema", "Computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta", "Problema-processador-e-memoria"],
-		"add": ["Problema-detectado"],
+		"action": "sistema-operacional-corrompido",
+		"preconds": ["computador-com-problema", "a-bios-inicia", "computador-liga", "sistema-operacional-inicia", "sistema-operacional-nao-inicia-completamente"],
+		"add": ["sistema-operacional-corrompido"],
 		"delete": ["computador-com-problema"]
 	},
     {
-		"action": "a-bios-nao-esta-iniciando",
-		"preconds": ["Computador-com-problema", "Computador-liga", "checar-bios", "a-bios-nao-inicia"],
+		"action": "a-bios-inicia",
+		"preconds": ["computador-com-problema", "computador-liga", "checar-bios", "a-bios-inicia"],
+		"add": ["checar-OS"],
+		"delete": ["checar-bios"]
+	},
+    {
+		"action": "a-bios-nao-inicia",
+		"preconds": ["computador-com-problema", "computador-liga", "checar-bios", "a-bios-nao-inicia"],
 		"add": ["checar-speaker"],
 		"delete": ["checar-bios"]
 	},
     {
+		"action": "sistema-operacional-nao-inicia",
+		"preconds": ["computador-com-problema", "computador-liga", "a-bios-inicia", "checar-OS", "sistema-operacional-nao-inicia"],
+		"add": ["checar-unidade-armazenamento"],
+		"delete": ["checar-OS"]
+	},
+    {
+		"action": "unidade-de-armazenamento-detectada",
+		"preconds": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "checar-unidade-armazenamento"],
+		"add": ["checar-ordem-boot"],
+		"delete": ["checar-unidade-armazenamento"]
+	},
+    {
+		"action": "ordem-de-boot-correta",
+		"preconds": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "checar-ordem-boot", "ordem-de-boot-correta"],
+		"add": ["checar-unidade-de-armazenamento-integra"],
+		"delete": ["checar-ordem-boot"]
+	},
+    {
+		"action": "unidade-de-armazenamento-nao-integra",
+		"preconds": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "ordem-de-boot-correta", "checar-unidade-de-armazenamento-integra", "unidade-de-armazenamento-nao-integra"],
+		"add": ["troque-o-HD/SDD"],
+		"delete": ["checar-unidade-de-armazenamento-integra", "computador-com-problema"]
+	},
+    {
 		"action": "Speaker-nao-emite-alerta",
-		"preconds": ["Computador-com-problema", "Computador-liga", "a-bios-nao-inicia", "checar-speaker", "Speaker-nao-emite-alerta"],
-		"add": ["Problema-na-placa-mae"],
-		"delete": [" "]
+		"preconds": ["computador-com-problema", "computador-liga", "a-bios-nao-inicia", "checar-speaker", "Speaker-nao-emite-alerta"],
+		"add": ["problema-na-placa-mae"],
+		"delete": ["computador-com-problema", "checar-speaker"]
 	},
     {
 		"action": "Speaker-emite-alerta",
-		"preconds": ["Computador-com-problema", "Computador-liga", "a-bios-nao-inicia", "checar-speaker", "Speaker-emite-alerta"],
-		"add": ["Problema-processador-e-memoria"],
-		"delete": [" "]
+		"preconds": ["computador-com-problema", "computador-liga", "a-bios-nao-inicia", "checar-speaker", "Speaker-emite-alerta"],
+		"add": ["problema-processador-ou-memoria-ram"],
+		"delete": ["computador-com-problema", "checar-speaker"]
 	},
     {
 		"action": "o-computador-liga",
-		"preconds": ["Computador-com-problema", "checar-computador-liga"],
-		"add": ["Computador-liga", "checar-bios"],
+		"preconds": ["computador-com-problema", "computador-liga"],
+		"add": ["checar-bios"],
 		"delete": ["checar-computador-liga"]
 	},
     {
 		"action": "o-computador-nao-liga",
-		"preconds": ["Computador-com-problema", "Computador-nao-liga"],
+		"preconds": ["computador-com-problema", "Computador-nao-liga"],
 		"add": ["checar-fonte"],
 		"delete": [" "]
 	},
     {
-		"action": "checar-se-a-fonte-inicia",
+		"action": "a-fonte-inicia",
 		"preconds": ["Computador-nao-liga", "checar-fonte"],
 		"add": ["fonte-inicia", "checar-voltagem"],
-		"delete": [" "]
+		"delete": ["checar-fonte"]
 	},
     {
 		"action": "a-fonte-nao-inicia",
@@ -64,22 +100,22 @@ problem = {
 		"delete": [" "]
 	},
     {
-		"action": "checar-se-voltagem-esta-correta",
-		"preconds": ["Computador-com-problema", "Computador-nao-liga", "fonte-inicia", "checar-voltagem"],
-		"add": ["Voltagem-correta"],
+		"action": "Voltagem-esta-correta",
+		"preconds": ["computador-com-problema", "Computador-nao-liga", "fonte-inicia", "checar-voltagem", "Voltagem-correta"],
+		"add": ["checar-circuito-alimentacao"],
 		"delete": ["checar-voltagem"]
 	},
     {
 		"action": "checar-circuito-de-alimentacao",
-		"preconds": ["Computador-com-problema", "Computador-nao-liga", "fonte-inicia", "Voltagem-correta"],
+		"preconds": ["computador-com-problema", "Computador-nao-liga", "fonte-inicia", "Voltagem-correta"],
 		"add": ["circuito-de-alimentacao"],
 		"delete": [" "]
 	},
     {
 		"action": "Problema-no-circuito-de-alimentacao-da-placa-mae",
-		"preconds": ["Computador-com-problema", "Computador-nao-liga", "fonte-inicia", "Voltagem-correta", "circuito-de-alimentacao"],
+		"preconds": ["computador-com-problema", "Computador-nao-liga", "fonte-inicia", "Voltagem-correta", "circuito-de-alimentacao"],
 		"add": ["Problema-detectado"],
-		"delete": ["Computador-com-problema"]
+		"delete": ["computador-com-problema"]
 	},
 	{
 		"action": "o-computador-esta-ligado-na-tomada",
@@ -101,7 +137,7 @@ problem = {
 	},
 	 {
 		"action": "checar-se-o-computador-liga",
-		"preconds": ["Computador-com-problema", "Computador-nao-liga"],
+		"preconds": ["computador-com-problema", "Computador-nao-liga"],
 		"add": ["fonte-inicia"],
 		"delete": [" "]
 	},
