@@ -72,6 +72,12 @@ problem = {
 		"delete": ["checar-unidade-de-armazenamento-integra", "computador-com-problema"]
 	},
     {
+		"action": "unidade-de-armazenamento-integra",
+		"preconds": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "ordem-de-boot-correta", "checar-unidade-de-armazenamento-integra", "unidade-de-armazenamento-integra"],
+		"add": ["sistema-operacional-corrompido"],
+		"delete": ["checar-unidade-de-armazenamento-integra", "computador-com-problema"]
+	},
+    {
 		"action": "Speaker-nao-emite-alerta",
 		"preconds": ["computador-com-problema", "computador-liga", "a-bios-nao-inicia", "checar-speaker", "Speaker-nao-emite-alerta"],
 		"add": ["problema-na-placa-mae"],
@@ -139,20 +145,20 @@ def Lista_Problemas():
     print("\nLista de Problemas:\n")
     print("1 - Operando-normalmente")
     print("2 - Sistema operacional corrompido")
-    print("3 - Troque o HD/SDD")
-    print("4 - Ajustar boot")
-    print("5 - HD desconectado ou com problema")
-    print("6 - Problema no processador ou memória RAM")
-    print("7 - Problema na placa mãe")
-    print("8 - Problema no circuito da placa mãe")
-    print("9 - Fonte está com problema")
-    print("10 - Fonte está queimada")
-    print("11 - Ligar na tomada")
+    print("3 - Sistema operacional corrompido")
+    print("4 - Troque o HD/SDD")
+    print("5 - Ajustar boot")
+    print("6 - HD desconectado ou com problema")
+    print("7 - Problema no processador ou memória RAM")
+    print("8 - Problema na placa mãe")
+    print("9 - Problema no circuito da placa mãe")
+    print("10 - Fonte está com problema")
+    print("11 - Fonte está queimada")
+    print("12 - Ligar na tomada")
     print("\n================================================================================\n")
 
     escolha = input("Escolha o número do problema que deseja simular: ")
-    
-    
+      
     problemas = {
         "1": (["computador-com-problema", "computador-liga", "a-bios-inicia",
                "sistema-operacional-inicia", "sistema-operacional-inicia-completamente"],
@@ -161,42 +167,47 @@ def Lista_Problemas():
         "2": (["computador-com-problema", "computador-liga", "a-bios-inicia",
                "sistema-operacional-inicia", "sistema-operacional-nao-inicia-completamente"],
               ["sistema-operacional-corrompido"]),
-
-        "3": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+              
+		"3": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+               "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "ordem-de-boot-correta", 
+               "unidade-de-armazenamento-integra" ],
+              ["sistema-operacional-corrompido"]),
+              	
+        "4": (["computador-com-problema", "computador-liga", "a-bios-inicia",
                "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada",
                "ordem-de-boot-correta", "unidade-de-armazenamento-nao-integra"],
               ["troque-o-HD/SDD"]),
 
-        "4": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+        "5": (["computador-com-problema", "computador-liga", "a-bios-inicia",
                "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada",
                "ordem-de-boot-nao-esta-correta"],
               ["ajustar-boot"]),
 
-        "5": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+        "6": (["computador-com-problema", "computador-liga", "a-bios-inicia",
                "sistema-operacional-nao-inicia", "unidade-de-armazenamento-nao-detectada"],
               ["HD-desconectado-ou-com-problema"]),
 
-        "6": (["computador-com-problema", "checar-computador-liga",
+        "7": (["computador-com-problema", "checar-computador-liga",
                "a-bios-nao-inicia", "Speaker-emite-alerta"],
               ["problema-processador-ou-memoria-ram"]),
 
-        "7": (["computador-com-problema", "computador-liga",
+        "8": (["computador-com-problema", "computador-liga",
                "a-bios-nao-inicia", "Speaker-nao-emite-alerta"],
               ["problema-na-placa-mae"]),
 
-        "8": (["computador-com-problema", "computador-nao-liga",
+        "9": (["computador-com-problema", "computador-nao-liga",
                "fonte-inicia", "voltagem-correta"],
               ["problema-no-circuito-da-placa-mae"]),
 
-        "9": (["computador-com-problema", "computador-nao-liga",
+        "10": (["computador-com-problema", "computador-nao-liga",
                "fonte-inicia", "voltagem-nao-esta-correta"],
               ["fonte-esta-com-problema"]),
 
-        "10": (["computador-com-problema", "computador-nao-liga",
+        "11": (["computador-com-problema", "computador-nao-liga",
                 "fonte-nao-inicia", "alimentacao-conectada"],
                ["fonte-esta-queimada"]),
 
-        "11": (["computador-com-problema", "computador-nao-liga",
+        "12": (["computador-com-problema", "computador-nao-liga",
                 "fonte-nao-inicia", "alimentacao-nao-conectada"],
                ["ligar-na-tomada"]),
     }
