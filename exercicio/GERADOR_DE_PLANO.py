@@ -3,54 +3,6 @@ from gps import gps
 
 
 problem = {
-    #Regra1:
-    #"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-inicia", "sistema-operacional-inicia-completamente"],
-    #"finish": ["Operando-normalmente"],
-    
-	#Regra 2:
-    #"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-inicia", "sistema-operacional-nao-inicia-completamente"],
-    #"finish": ["sistema-operacional-corrompido"],
-    
-	#Regra 3: 
-    
-	#"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-inicia", "sistema-operacional-nao-inicia-completamente"],
-    #"finish": ["sistema-operacional-corrompido"],
-    
-	#Regra 4: 
-	"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "ordem-de-boot-correta", "unidade-de-armazenamento-nao-integra"],
-	"finish": ["troque-o-HD/SDD"],
-    
-	#Regra 5: 
-    #"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "ordem-de-boot-nao-esta-correta"],
-    #"finish": ["ajustar-boot"],
-
-	#Regra 6: 
-    #"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-nao-detectada"],
-    #"finish": ["HD-desconectado-ou-com-problema"],
-    
-	#Regra 7
-    #"init": ["computador-com-problema", "checar-computador-liga", "a-bios-nao-inicia", "Speaker-emite-alerta"],
-    #"finish": ["problema-processador-ou-memoria-ram"],
-    
-	#Regra 8
-	#"init": ["computador-com-problema", "computador-liga", "a-bios-nao-inicia", "Speaker-nao-emite-alerta"],
-	#"finish": ["problema-na-placa-mae"],
-    
-	#Regra 9
-    #"init": ["computador-com-problema", "computador-nao-liga", "fonte-inicia", "voltagem-correta"],
-	#"finish": ["problema-no-circuito-da-placa-mae"],
-    
-	#Regra 10
-    #"init": ["computador-com-problema", "computador-nao-liga", "fonte-inicia", "voltagem-nao-esta-correta"],
-	#"finish": ["fonte-esta-com-problema"],
-    
-    #Regra 11
-    #"init": ["computador-com-problema", "computador-nao-liga", "fonte-nao-inicia", "alimentacao-conectada"],
-	#"finish": ["fonte-esta-queimada"],
-    
-	#Regra 12
-    #"init": ["computador-com-problema", "computador-nao-liga", "fonte-nao-inicia", "alimentacao-nao-conectada"],
-	#"finish": ["ligar-na-tomada"],
     
 	"ops": [
     {
