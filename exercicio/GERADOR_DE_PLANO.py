@@ -1,6 +1,7 @@
 
 from gps import gps
 
+
 problem = {
     #Regra1:
     #"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-inicia", "sistema-operacional-inicia-completamente"],
@@ -21,7 +22,7 @@ problem = {
     
 	#Regra 5: 
     #"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "ordem-de-boot-nao-esta-correta"],
-    #"finish": ["Ajustar-Boot"],
+    #"finish": ["ajustar-boot"],
 
 	#Regra 6: 
     #"init": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-nao-detectada"],
@@ -109,7 +110,7 @@ problem = {
     {
 		"action": "ordem-de-boot-nao-esta-correta",
 		"preconds": ["computador-com-problema", "computador-liga", "a-bios-inicia", "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada", "checar-ordem-boot", "ordem-de-boot-nao-esta-correta"],
-		"add": ["Ajustar-Boot"],
+		"add": ["ajustar-boot"],
 		"delete": ["computador-com-problema", "checar-ordem-boot"]
 	},
     {
@@ -181,10 +182,83 @@ problem = {
 	}, 
 	]
 }
+def Lista_Problemas():
+    print("================================================================================")
+    print("\nLista de Problemas:\n")
+    print("1 - Operando-normalmente")
+    print("2 - Sistema operacional corrompido")
+    print("3 - Troque o HD/SDD")
+    print("4 - Ajustar boot")
+    print("5 - HD desconectado ou com problema")
+    print("6 - Problema no processador ou memória RAM")
+    print("7 - Problema na placa mãe")
+    print("8 - Problema no circuito da placa mãe")
+    print("9 - Fonte está com problema")
+    print("10 - Fonte está queimada")
+    print("11 - Ligar na tomada")
+    print("\n================================================================================\n")
+
+    escolha = input("Escolha o número do problema que deseja simular: ")
+    
+    
+    problemas = {
+        "1": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+               "sistema-operacional-inicia", "sistema-operacional-inicia-completamente"],
+              ["Operando-normalmente"]),
+
+        "2": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+               "sistema-operacional-inicia", "sistema-operacional-nao-inicia-completamente"],
+              ["sistema-operacional-corrompido"]),
+
+        "3": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+               "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada",
+               "ordem-de-boot-correta", "unidade-de-armazenamento-nao-integra"],
+              ["troque-o-HD/SDD"]),
+
+        "4": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+               "sistema-operacional-nao-inicia", "unidade-de-armazenamento-detectada",
+               "ordem-de-boot-nao-esta-correta"],
+              ["ajustar-boot"]),
+
+        "5": (["computador-com-problema", "computador-liga", "a-bios-inicia",
+               "sistema-operacional-nao-inicia", "unidade-de-armazenamento-nao-detectada"],
+              ["HD-desconectado-ou-com-problema"]),
+
+        "6": (["computador-com-problema", "checar-computador-liga",
+               "a-bios-nao-inicia", "Speaker-emite-alerta"],
+              ["problema-processador-ou-memoria-ram"]),
+
+        "7": (["computador-com-problema", "computador-liga",
+               "a-bios-nao-inicia", "Speaker-nao-emite-alerta"],
+              ["problema-na-placa-mae"]),
+
+        "8": (["computador-com-problema", "computador-nao-liga",
+               "fonte-inicia", "voltagem-correta"],
+              ["problema-no-circuito-da-placa-mae"]),
+
+        "9": (["computador-com-problema", "computador-nao-liga",
+               "fonte-inicia", "voltagem-nao-esta-correta"],
+              ["fonte-esta-com-problema"]),
+
+        "10": (["computador-com-problema", "computador-nao-liga",
+                "fonte-nao-inicia", "alimentacao-conectada"],
+               ["fonte-esta-queimada"]),
+
+        "11": (["computador-com-problema", "computador-nao-liga",
+                "fonte-nao-inicia", "alimentacao-nao-conectada"],
+               ["ligar-na-tomada"]),
+    }
+    print("\n================================================================================\n")
+
+    if escolha in problemas:
+        return problemas[escolha]
+    else:
+        print("Opção inválida.")
+        exit(1)
 
 def main():
-    start = problem['init']
-    finish = problem['finish']
+
+    start, finish = Lista_Problemas()
     ops = problem['ops']
     msg = 'Deve-se executar:  '
     plan = gps(start, finish, ops, msg)
@@ -193,6 +267,6 @@ def main():
             print (action)
     else:
         print('O plano não foi gerado')
-
+    print("\n================================================================================\n")
 if __name__ == '__main__':
     main()
