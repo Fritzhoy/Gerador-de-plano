@@ -157,7 +157,7 @@ def Lista_Problemas():
     print("12 - Ligar na tomada")
     print("\n================================================================================\n")
 
-    escolha = input("Escolha o número do problema que deseja simular: ")
+    escolha = input("Escolha o número do problema que deseja gerar o plano: ")
       
     problemas = {
         "1": (["computador-com-problema", "computador-liga", "a-bios-inicia",
