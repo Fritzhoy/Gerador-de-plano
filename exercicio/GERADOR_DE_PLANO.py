@@ -6,13 +6,13 @@ problem = {
     
 	"ops": [
     {
-		"action": "Cheque se o sistema operacional inicia completamente",
+		"action": "O sistema operacional inicia completamente",
 		"preconds": ["computador-com-problema", "a-bios-inicia", "computador-liga", "sistema-operacional-inicia", "checar-sistema-operacional-inicia-completamente", "sistema-operacional-inicia-completamente"],
 		"add": ["Operando-normalmente"],
 		"delete": ["computador-com-problema", "checar-sistema-operacional-inicia-completamente"]
 	},
     {
-		"action": "Cheque se o sistema operacional inicia completamente",
+		"action": "O sistema operacional inicia completamente",
 		"preconds": ["computador-com-problema", "a-bios-inicia", "computador-liga", "sistema-operacional-inicia", "checar-sistema-operacional-inicia-completamente", "sistema-operacional-nao-inicia-completamente"],
 		"add": ["sistema-operacional-corrompido"],
 		"delete": ["computador-com-problema", "checar-sistema-operacional-inicia-completamente"]
@@ -143,7 +143,7 @@ problem = {
 def Lista_Problemas():
     print("================================================================================")
     print("\nLista de Problemas:\n")
-    print("1 - Operando-normalmente")
+    print("1 - Operando normalmente")
     print("2 - Reinstalar sistema operacional")
     print("3 - Sistema operacional corrompido")
     print("4 - Troque o HD/SDD")
@@ -154,7 +154,7 @@ def Lista_Problemas():
     print("9 - Problema no circuito da placa mãe")
     print("10 - Fonte está com problema")
     print("11 - Fonte está queimada")
-    print("12 - Ligar na tomada")
+    print("12 - Computador não está conectado a tomada")
     print("\n================================================================================\n")
 
     escolha = input("Escolha o número do problema que deseja gerar o plano: ")
